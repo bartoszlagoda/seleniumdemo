@@ -1,9 +1,22 @@
 package com.seleniumdemo.pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoggedUserPage {
-    public LoggedUserPage(WebDriver driver) {
 
+    @FindBy(xpath = "//div[@class='entry-header-inner']/h1[@class='entry-title' and contains(text(),'My account')]")
+    private WebElement myAccountHeader;
+
+    private WebDriver driver;
+    public LoggedUserPage(WebDriver driver) {
+        PageFactory.initElements(driver,this);
+        this.driver = driver;
+    }
+
+    public WebElement getEntryTitle(){
+        return myAccountHeader;
     }
 }
