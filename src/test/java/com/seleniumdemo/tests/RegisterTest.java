@@ -1,14 +1,14 @@
 package com.seleniumdemo.tests;
 
-import com.seleniumdemo.pages.RegisterPage;
+import com.seleniumdemo.pages.HomePage;
 import org.testng.annotations.Test;
 
 public class RegisterTest extends BaseTest{
 
     @Test
-    public void registerUserTest() throws InterruptedException {
-        RegisterPage registerPage = new RegisterPage(driver);
-        registerPage.openMyAccountLink();
-        Thread.sleep(2000);
+    public void registerUserTest() {
+
+        new HomePage(driver).openMyAccountPage()
+                .registerUser("test@test.pl","test@test.pl");
     }
 }
