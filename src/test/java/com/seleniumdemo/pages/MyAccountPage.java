@@ -22,6 +22,15 @@ public class MyAccountPage {
     @FindBy(xpath = "//ul[@class='woocommerce-error']/li")
     private WebElement failedRegisterAlert;
 
+    @FindBy(id = "username")
+    private WebElement loginUsername;
+
+    @FindBy(id = "password")
+    private WebElement loginPassword;
+
+    @FindBy(name = "login")
+    private WebElement loginBtn;
+
     private WebDriver driver;
 
     public MyAccountPage(WebDriver driver) {
@@ -39,6 +48,28 @@ public class MyAccountPage {
         registerUser(email,password);
 
         return this;
+    }
+
+    public LoggedUserPage loginUserValidData(String email, String password) {
+        loginUser(email,password);
+
+        return new LoggedUserPage(driver);
+    }
+
+    public MyAccountPage loginUserInvalidData(String email, String password) {
+        loginUser(email,password);
+
+        return this;
+    }
+
+    private void loginUser(String email, String password){
+        loginUsername.sendKeys(email);
+        loginPassword.sendKeys(password);
+
+        FluentWait<WebDriver> wait = new FluentWait<>(driver);
+        wait.until(ExpectedConditions.elementToBeClickable(By.name("login")));
+
+        loginBtn.click();
     }
 
     private void registerUser(String email, String password){
