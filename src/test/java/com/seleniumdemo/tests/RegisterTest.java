@@ -14,7 +14,7 @@ public class RegisterTest extends BaseTest {
 
         WebElement entryTitle = new HomePage(driver)
                 .openMyAccountPage()
-                .registerUser("test" + randomNum + "@test2.com", "test" + randomNum + "@test2.com")
+                .registerUserValidData("test" + randomNum + "@test2.com", "test" + randomNum + "@test2.com")
                 .getEntryTitle();
 
         Assert.assertTrue(entryTitle.getText().contains("Hello"));
@@ -25,8 +25,8 @@ public class RegisterTest extends BaseTest {
 
         WebElement failedRegisterAlert = new HomePage(driver)
                 .openMyAccountPage()
-                .registerUser("test1@test1.com","test1@test1.com")
-                .getFailedRegisterAlert();
+                .registerUserInvalidData("test1@test1.com","test1@test1.com")
+                        .getFailedRegisterAlert();
 
         Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"));
     }

@@ -12,9 +12,6 @@ public class LoggedUserPage {
     @FindBy(xpath = "//div[@class='woocommerce']/div[@class='woocommerce-MyAccount-content']/p[contains(text(),'Hello ')]")
     private WebElement welcomeParagraph;
 
-    @FindBy(xpath = "//ul[@class='woocommerce-error']/li")
-    private WebElement failedRegisterAlert;
-
 
     private WebDriver driver;
 
@@ -25,11 +22,5 @@ public class LoggedUserPage {
 
     public WebElement getEntryTitle() {
         return welcomeParagraph;
-    }
-
-    public WebElement getFailedRegisterAlert(){
-        FluentWait<WebDriver> wait = new FluentWait<>(driver);
-        wait.until(ExpectedConditions.visibilityOf(failedRegisterAlert));
-        return failedRegisterAlert;
     }
 }
