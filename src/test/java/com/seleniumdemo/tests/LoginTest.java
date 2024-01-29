@@ -26,7 +26,6 @@ public class LoginTest extends BaseTest {
                 .loginUserInvalidData("test1@test1.com", "test@test.com")
                 .getError();
 
-//        Assert.assertEquals(failedRegisterAlert.getAttribute("value"),"An account is already registered");
         Assert.assertTrue(failedLoginAlert.getText().contains("Incorrect username or password.") || failedLoginAlert.getText().contains("Too many failed login attempts"), "Expected alert text doesn't match - " + failedLoginAlert.getText());
     }
 }
