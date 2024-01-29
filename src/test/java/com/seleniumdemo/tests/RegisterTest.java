@@ -10,11 +10,11 @@ public class RegisterTest extends BaseTest {
     @Test
     public void registerUserTest() {
 
-        WebElement entryTitle = new HomePage(driver).openMyAccountPage()
-                .registerUser("test2@test.pl", "test@test.pl")
+        WebElement entryTitle = new HomePage(driver)
+                .openMyAccountPage()
+                .registerUser("test2@test2.com", "test2@test2.com")
                 .getEntryTitle();
 
-        Assert.assertTrue(entryTitle.isDisplayed());
-        Assert.assertEquals(entryTitle.getText(),"My account");
+        Assert.assertTrue(entryTitle.getText().contains("Hello"));
     }
 }

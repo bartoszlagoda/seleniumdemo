@@ -7,16 +7,17 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoggedUserPage {
 
-    @FindBy(xpath = "//div[@class='entry-header-inner']/h1[@class='entry-title' and contains(text(),'My account')]")
-    private WebElement myAccountHeader;
+    @FindBy(xpath = "//div[@class='woocommerce']/div[@class='woocommerce-MyAccount-content']/p[contains(text(),'Hello ')]")
+    private WebElement welcomeParagraph;
 
     private WebDriver driver;
+
     public LoggedUserPage(WebDriver driver) {
-        PageFactory.initElements(driver,this);
+        PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
-    public WebElement getEntryTitle(){
-        return myAccountHeader;
+    public WebElement getEntryTitle() {
+        return welcomeParagraph;
     }
 }
