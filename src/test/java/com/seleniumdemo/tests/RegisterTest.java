@@ -19,4 +19,15 @@ public class RegisterTest extends BaseTest {
 
         Assert.assertTrue(entryTitle.getText().contains("Hello"));
     }
+
+    @Test
+    public void registerUserWithSameEmailTest() {
+
+        WebElement failedRegisterAlert = new HomePage(driver)
+                .openMyAccountPage()
+                .registerUser("test1@test1.com","test1@test1.com")
+                .getFailedRegisterAlert();
+
+        Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"));
+    }
 }
