@@ -20,7 +20,7 @@ public class MyAccountPage {
     private WebElement registerBtn;
 
     @FindBy(xpath = "//ul[@class='woocommerce-error']/li")
-    private WebElement failedRegisterAlert;
+    private WebElement error;
 
     @FindBy(id = "username")
     private WebElement loginUsername;
@@ -39,30 +39,30 @@ public class MyAccountPage {
     }
 
     public LoggedUserPage registerUserValidData(String email, String password) {
-        registerUser(email,password);
+        registerUser(email, password);
 
         return new LoggedUserPage(driver);
     }
 
     public MyAccountPage registerUserInvalidData(String email, String password) {
-        registerUser(email,password);
+        registerUser(email, password);
 
         return this;
     }
 
     public LoggedUserPage loginUserValidData(String email, String password) {
-        loginUser(email,password);
+        loginUser(email, password);
 
         return new LoggedUserPage(driver);
     }
 
     public MyAccountPage loginUserInvalidData(String email, String password) {
-        loginUser(email,password);
+        loginUser(email, password);
 
         return this;
     }
 
-    private void loginUser(String email, String password){
+    private void loginUser(String email, String password) {
         loginUsername.sendKeys(email);
         loginPassword.sendKeys(password);
 
@@ -72,7 +72,7 @@ public class MyAccountPage {
         loginBtn.click();
     }
 
-    private void registerUser(String email, String password){
+    private void registerUser(String email, String password) {
         regEmailInput.sendKeys(email);
         regPasswordInput.sendKeys(password);
 
@@ -82,9 +82,9 @@ public class MyAccountPage {
         registerBtn.click();
     }
 
-    public WebElement getFailedRegisterAlert(){
+    public WebElement getError() {
         FluentWait<WebDriver> wait = new FluentWait<>(driver);
-        wait.until(ExpectedConditions.visibilityOf(failedRegisterAlert));
-        return failedRegisterAlert;
+        wait.until(ExpectedConditions.visibilityOf(error));
+        return error;
     }
 }

@@ -25,8 +25,8 @@ public class RegisterTest extends BaseTest {
 
         WebElement failedRegisterAlert = new HomePage(driver)
                 .openMyAccountPage()
-                .registerUserInvalidData("test1@test1.com","test1@test1.com")
-                        .getFailedRegisterAlert();
+                .registerUserInvalidData("test1@test1.com", "test1@test1.com")
+                .getError();
 
         Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"));
     }
