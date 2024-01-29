@@ -2,6 +2,7 @@ package com.seleniumdemo.tests;
 
 import com.seleniumdemo.utils.DriverFactory;
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
@@ -18,8 +19,8 @@ public class BaseTest {
         driver.get("http://seleniumdemo.com/");
     }
 
-//    @AfterMethod
-//    public void tearDown(){
-//        driver.quit();
-//    }
+    @AfterMethod
+    public void tearDown(){
+        driver.quit();
+    }
 }
