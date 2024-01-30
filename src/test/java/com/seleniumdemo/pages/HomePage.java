@@ -26,7 +26,7 @@ public class HomePage {
         return new MyAccountPage(driver);
     }
 
-    public ProductListPage openShopPage(){
+    public ProductListPage openShopPage() {
         System.out.println("Otworzono opcje 'Shop'");
         shopLink.click();
 

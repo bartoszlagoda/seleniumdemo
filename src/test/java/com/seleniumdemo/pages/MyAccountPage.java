@@ -5,8 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
+
+import static com.seleniumdemo.utils.SeleniumHelper.waitForClickable;
+import static com.seleniumdemo.utils.SeleniumHelper.waitForVisibility;
 
 public class MyAccountPage {
 
@@ -66,8 +67,7 @@ public class MyAccountPage {
         loginUsername.sendKeys(email);
         loginPassword.sendKeys(password);
 
-        FluentWait<WebDriver> wait = new FluentWait<>(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(By.name("login")));
+        waitForClickable(By.name("login"), driver);
 
         loginBtn.click();
     }
@@ -76,15 +76,13 @@ public class MyAccountPage {
         regEmailInput.sendKeys(email);
         regPasswordInput.sendKeys(password);
 
-        FluentWait<WebDriver> wait = new FluentWait<>(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(By.name("register")));
+        waitForClickable(By.name("register"), driver);
 
         registerBtn.click();
     }
 
     public WebElement getError() {
-        FluentWait<WebDriver> wait = new FluentWait<>(driver);
-        wait.until(ExpectedConditions.visibilityOf(error));
+        waitForVisibility(error, driver);
         return error;
     }
 }

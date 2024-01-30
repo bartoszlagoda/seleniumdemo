@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
+
+import static com.seleniumdemo.utils.SeleniumHelper.waitForVisibility;
 
 public class CartPage {
 
@@ -13,17 +13,15 @@ public class CartPage {
     private WebElement proceedToCheckoutBtn;
 
     private WebDriver driver;
+
     public CartPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
     }
 
-    public AddressDetailsPage proceedToCheckout(){
-        FluentWait<WebDriver> wait = new FluentWait<>(driver);
-        wait.until(ExpectedConditions.visibilityOf(proceedToCheckoutBtn));
+    public AddressDetailsPage proceedToCheckout() {
+        waitForVisibility(proceedToCheckoutBtn, driver);
         proceedToCheckoutBtn.click();
-
-        System.out.println("Poprawnie potwierdzono zamowienie");
 
         return new AddressDetailsPage(driver);
     }

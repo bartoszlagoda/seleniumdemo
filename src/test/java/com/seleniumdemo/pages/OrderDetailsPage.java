@@ -4,8 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
+
+import static com.seleniumdemo.utils.SeleniumHelper.waitForVisibility;
 
 public class OrderDetailsPage {
 
@@ -18,8 +18,7 @@ public class OrderDetailsPage {
     private WebDriver driver;
 
     public WebElement getOrderNotice() {
-        FluentWait<WebDriver> wait = new FluentWait<>(driver);
-        wait.until(ExpectedConditions.visibilityOf(orderNotice));
+        waitForVisibility(orderNotice, driver);
         return orderNotice;
     }
 
