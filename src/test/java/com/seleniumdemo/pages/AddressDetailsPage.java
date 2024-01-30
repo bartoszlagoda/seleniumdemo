@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
 public class AddressDetailsPage {
@@ -18,7 +20,7 @@ public class AddressDetailsPage {
     @FindBy(xpath = "//input[@id='billing_company']")
     private WebElement billingCompany;
 
-    @FindBy(xpath = "//span[@id='select2-billing_country-container']")
+    @FindBy(xpath = "//span[@class='woocommerce-input-wrapper']/select[@id='billing_country']")
     private WebElement billingCountryContainer;
 
     @FindBy(xpath = "//input[@id='billing_address_1']")
@@ -39,7 +41,7 @@ public class AddressDetailsPage {
     @FindBy(xpath = "//input[@id='billing_email']")
     private WebElement billingEmail;
 
-    @FindBy(xpath = "//input[@id='order_comments']")
+    @FindBy(xpath = "//span[@class='woocommerce-input-wrapper']/textarea[@name='order_comments']")
     private WebElement orderComments;
 
     @FindBy(xpath = "//button[@id='place_order']")
@@ -53,7 +55,12 @@ public class AddressDetailsPage {
     }
 
     public OrderDetailsPage fillAddressDetails(Customer customer, String comments){
+        FluentWait<WebDriver> wait = new FluentWait<>(driver);
+        wait.until(ExpectedConditions.visibilityOf(billingFirstName));
         billingFirstName.sendKeys(customer.getFirstname());
+        wait.until(ExpectedConditions.visibilityOf(orderComments));
+        orderComments.sendKeys(comments);
+
         billingLastName.sendKeys(customer.getLastName());
         billingCompany.sendKeys(customer.getCompanyName());
 
@@ -63,10 +70,8 @@ public class AddressDetailsPage {
         billingAddress1.sendKeys(String.format("%s %s", customer.getStreet(), customer.getFlatNumber()));
         billingPostcode.sendKeys(customer.getZipCode());
         billingCity.sendKeys(customer.getCity());
-        billingCity.sendKeys(customer.getCity());
         billingPhone.sendKeys(customer.getPhone());
         billingEmail.sendKeys(customer.getEmail());
-        orderComments.sendKeys(comments);
 
         return new OrderDetailsPage(driver);
     }
