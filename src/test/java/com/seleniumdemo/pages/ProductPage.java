@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 
 public class ProductPage {
 
@@ -20,12 +22,17 @@ public class ProductPage {
     }
 
     public ProductPage addProductToCart(){
+        FluentWait<WebDriver> wait = new FluentWait<>(driver);
+        wait.until(ExpectedConditions.visibilityOf(addToCartBtn));
         addToCartBtn.click();
+
+        System.out.println("Dodano produkt do karty");
 
         return this;
     }
 
     public CartPage viewCart(){
+        System.out.println("Poprawne przejscie do podgladu zamowienia");
         viewCartBtn.click();
 
         return new CartPage(driver);

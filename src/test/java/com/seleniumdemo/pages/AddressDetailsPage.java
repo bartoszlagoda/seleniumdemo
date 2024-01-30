@@ -1,6 +1,8 @@
 package com.seleniumdemo.pages;
 
 import com.seleniumdemo.models.Customer;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,7 +46,7 @@ public class AddressDetailsPage {
     @FindBy(xpath = "//span[@class='woocommerce-input-wrapper']/textarea[@name='order_comments']")
     private WebElement orderComments;
 
-    @FindBy(xpath = "//button[@id='place_order']")
+    @FindBy(xpath = "//button[@name='woocommerce_checkout_place_order']")
     private WebElement placeOrderBtn;
 
     private WebDriver driver;
@@ -54,7 +56,7 @@ public class AddressDetailsPage {
         this.driver = driver;
     }
 
-    public OrderDetailsPage fillAddressDetails(Customer customer, String comments){
+    public OrderDetailsPage fillAddressDetails(Customer customer, String comments) throws InterruptedException {
         FluentWait<WebDriver> wait = new FluentWait<>(driver);
         wait.until(ExpectedConditions.visibilityOf(billingFirstName));
         billingFirstName.sendKeys(customer.getFirstname());
@@ -72,6 +74,18 @@ public class AddressDetailsPage {
         billingCity.sendKeys(customer.getCity());
         billingPhone.sendKeys(customer.getPhone());
         billingEmail.sendKeys(customer.getEmail());
+
+        System.out.println("Poprawnie wypelniono wszystkie dane do zamowienia");
+
+        Thread.sleep(1000);
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,650)", "");
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name='woocommerce_checkout_place_order']")));
+        placeOrderBtn.click();
+
+        System.out.println("Poprawnie kliknieto w placeOrder button");
 
         return new OrderDetailsPage(driver);
     }

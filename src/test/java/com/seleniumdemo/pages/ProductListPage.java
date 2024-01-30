@@ -22,6 +22,8 @@ public class ProductListPage {
         wait.until(ExpectedConditions.visibilityOf(elToAddFromCart));
         elToAddFromCart.click();
 
+        System.out.println("Wybrano " + product);
+
         return new ProductPage(driver);
     }
 }
