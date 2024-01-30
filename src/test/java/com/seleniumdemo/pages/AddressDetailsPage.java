@@ -1,9 +1,11 @@
 package com.seleniumdemo.pages;
 
+import com.seleniumdemo.models.Customer;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
 
 public class AddressDetailsPage {
 
@@ -48,5 +50,24 @@ public class AddressDetailsPage {
     public AddressDetailsPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
+    }
+
+    public OrderDetailsPage fillAddressDetails(Customer customer, String comments){
+        billingFirstName.sendKeys(customer.getFirstname());
+        billingLastName.sendKeys(customer.getLastName());
+        billingCompany.sendKeys(customer.getCompanyName());
+
+        Select countrySelect = new Select(billingCountryContainer);
+        countrySelect.selectByVisibleText(customer.getCountry());
+
+        billingAddress1.sendKeys(String.format("%s %s", customer.getStreet(), customer.getFlatNumber()));
+        billingPostcode.sendKeys(customer.getZipCode());
+        billingCity.sendKeys(customer.getCity());
+        billingCity.sendKeys(customer.getCity());
+        billingPhone.sendKeys(customer.getPhone());
+        billingEmail.sendKeys(customer.getEmail());
+        orderComments.sendKeys(comments);
+
+        return new OrderDetailsPage(driver);
     }
 }
