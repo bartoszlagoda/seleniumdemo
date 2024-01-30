@@ -4,7 +4,7 @@ public class Customer {
 
     // ALT + INSERT -> generowanie setterow i getterow
 
-    private String firstname;
+    private String firstname = "Bartek";
 
     public String getFirstname() {
         return firstname;
@@ -86,13 +86,13 @@ public class Customer {
         this.email = email;
     }
 
-    private String lastName;
-    private String companyName;
-    private String country;
-    private String street;
-    private String flatNumber;
-    private String zipCode;
-    private String city;
-    private String phone;
-    private String email;
+    private String lastName = "Testowy";
+    private String companyName = "BMB";
+    private String country = "Poland";
+    private String street = "Testowa";
+    private String flatNumber = "22";
+    private String zipCode = "11111";
+    private String city = "Testowe";
+    private String phone = "111111111";
+    private String email = "randomEmail@randomemail.com";
 }
