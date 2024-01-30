@@ -13,14 +13,15 @@ public class CheckoutTest extends BaseTest {
         Customer customer = new Customer();
         customer.setEmail("specificEmail@specificemail.com");
 
-        OrderDetailsPage order = new HomePage(driver).openShopPage()
+        OrderDetailsPage order = new HomePage(driver)
+                .openShopPage()
                 .chooseProductFromProductListPage("Java Selenium WebDriver")
                 .addProductToCart()
                 .viewCart()
                 .proceedToCheckout()
-                .fillAddressDetails(customer,"Some random comment");
+                .fillAddressDetails(customer, "Some random comment");
 
-        Assert.assertEquals(order.getOrderNotice().getText(),"Thank you. Your order has been received.");
+        Assert.assertEquals(order.getOrderNotice().getText(), "Thank you. Your order has been received.");
         Assert.assertEquals(order.getProductName().getText(), "Java Selenium WebDriver × 1");
     }
 }
