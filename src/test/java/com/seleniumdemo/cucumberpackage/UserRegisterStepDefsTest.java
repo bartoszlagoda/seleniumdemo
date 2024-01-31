@@ -1,10 +1,16 @@
+package com.seleniumdemo.cucumberpackage;
+
+import com.seleniumdemo.testngpackage.utils.DriverFactory;
 import io.cucumber.java.en.*;
+import org.openqa.selenium.WebDriver;
 
 public class UserRegisterStepDefsTest {
 
     @Given("Uzytkownik znajduje sie na stronie glownej sklepu")
     public void uzytkownik_znajduje_sie_na_stronie_glownej_sklepu() {
-        System.out.println("Przejscie na strone glowna sklepu");
+        WebDriver driver = DriverFactory.getDriver();
+        driver.manage().window().maximize();
+        driver.get("http://seleniumdemo.com/");
     }
 
     @When("Przejscie do strony MyAccount")

@@ -1,11 +1,11 @@
-package com.seleniumdemo.pages;
+package com.seleniumdemo.testngpackage.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static com.seleniumdemo.utils.SeleniumHelper.waitForVisibility;
+import static com.seleniumdemo.testngpackage.utils.SeleniumHelper.waitForVisibility;
 
 public class ProductPage {
 

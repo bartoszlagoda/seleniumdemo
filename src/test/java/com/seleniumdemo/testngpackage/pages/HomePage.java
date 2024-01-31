@@ -1,4 +1,4 @@
-package com.seleniumdemo.pages;
+package com.seleniumdemo.testngpackage.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

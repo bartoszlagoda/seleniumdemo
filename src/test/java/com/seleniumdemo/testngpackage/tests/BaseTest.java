@@ -1,6 +1,6 @@
-package com.seleniumdemo.tests;
+package com.seleniumdemo.testngpackage.tests;
 
-import com.seleniumdemo.utils.DriverFactory;
+import com.seleniumdemo.testngpackage.utils.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

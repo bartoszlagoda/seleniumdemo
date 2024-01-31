@@ -1,4 +1,4 @@
-package com.seleniumdemo.models;
+package com.seleniumdemo.testngpackage.models;
 
 public class Customer {
 
