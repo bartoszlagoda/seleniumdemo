@@ -17,7 +17,6 @@ public class UserRegisterStepDefsTest {
     WebDriver driver;
     WebElement entryTitle;
     WebElement failedRegisterAlert;
-    int randomNumber = (int) (Math.random()*1000);
 
     @Given("Uzytkownik znajduje sie na stronie glownej sklepu")
     public void uzytkownik_znajduje_sie_na_stronie_glownej_sklepu() {
