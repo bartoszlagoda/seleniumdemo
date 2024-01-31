@@ -51,7 +51,9 @@ public class UserRegisterStepDefsTest {
 
     @But("Nie jest widoczny formularz rejestracji uzytkownika")
     public void nieJestWidocznyFormularzRejestracjiUzytkownika() {
-        System.out.println("Nie jest widoczny formularz rejestracji");
+        int emailInputSize = driver.findElements(By.id("reg_email")).size();
+        Assert.assertTrue(emailInputSize == 0);
+        driver.quit();
     }
 
     @And("Wprowadzamy niepoprawne dane do formularza rejestracji")
@@ -65,5 +67,6 @@ public class UserRegisterStepDefsTest {
     @Then("Wyswietla sie komunikat o niepoprawnym adresie email")
     public void wyswietlaSieKomunikatONiepoprawnymAdresieEmail() {
         Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"));
+        driver.quit();
     }
 }
