@@ -1,17 +1,23 @@
 package com.seleniumdemo.cucumberpackage;
 
+import com.github.javafaker.Faker;
 import com.seleniumdemo.testngpackage.pages.HomePage;
 import com.seleniumdemo.testngpackage.pages.MyAccountPage;
 import com.seleniumdemo.testngpackage.utils.DriverFactory;
 import io.cucumber.java.en.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class UserRegisterStepDefsTest {
 
     WebDriver driver;
     WebElement entryTitle;
+    WebElement failedRegisterAlert;
+    int randomNumber = (int) (Math.random()*1000);
 
     @Given("Uzytkownik znajduje sie na stronie glownej sklepu")
     public void uzytkownik_znajduje_sie_na_stronie_glownej_sklepu() {
@@ -29,13 +35,17 @@ public class UserRegisterStepDefsTest {
 
     @And("Wprowadzamy poprawne dane do formularza rejestracji")
     public void wprowadzamyPoprawneDaneDoFormularzaRejestracji() {
+        Faker faker = new Faker();
         entryTitle = new MyAccountPage(driver)
-                .registerUserValidData("tester"+ (int) (Math.random()*1000) + "@gmail.com","testeroprogramowania@testeroprogramowania.com")
+                .registerUserValidData(faker.internet().emailAddress(),"testeroprogramowania@testeroprogramowania.com")
                 .getEntryTitle();
     }
 
     @Then("Uzytkownik zostaje przekierowany do strony Moje Konto")
     public void uzytkownikZostajePrzekierowanyDoStronyMojeKonto() {
+        List<WebElement> logoutLinks = driver.findElements(By.linkText("Logout"));
+        Assert.assertTrue(logoutLinks.size() > 0);
+        Assert.assertTrue(logoutLinks.get(0).isDisplayed());
         Assert.assertTrue(entryTitle.getText().contains("Hello"));
     }
 
@@ -46,11 +56,14 @@ public class UserRegisterStepDefsTest {
 
     @And("Wprowadzamy niepoprawne dane do formularza rejestracji")
     public void wprowadzamyNiepoprawneDaneDoFormularzaRejestracji() {
-        System.out.println("Wprowadzamy niepoprawne dane");
+        failedRegisterAlert = new HomePage(driver)
+                .openMyAccountPage()
+                .registerUserInvalidData("test1@test1.com", "test1@test1.com")
+                .getError();
     }
 
     @Then("Wyswietla sie komunikat o niepoprawnym adresie email")
     public void wyswietlaSieKomunikatONiepoprawnymAdresieEmail() {
-        System.out.println("Wyswietla sie komunikat o niepoprawnym adresie email");
+        Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"));
     }
 }
