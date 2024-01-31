@@ -1,8 +1,8 @@
-package com.seleniumdemo.tests;
+package com.seleniumdemo.testngpackage.tests;
 
-import com.seleniumdemo.models.Customer;
-import com.seleniumdemo.pages.HomePage;
-import com.seleniumdemo.pages.OrderDetailsPage;
+import com.seleniumdemo.testngpackage.models.Customer;
+import com.seleniumdemo.testngpackage.pages.HomePage;
+import com.seleniumdemo.testngpackage.pages.OrderDetailsPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

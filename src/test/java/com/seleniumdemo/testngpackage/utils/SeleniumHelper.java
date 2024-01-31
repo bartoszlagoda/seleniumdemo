@@ -1,4 +1,4 @@
-package com.seleniumdemo.utils;
+package com.seleniumdemo.testngpackage.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

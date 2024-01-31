@@ -1,13 +1,13 @@
-package com.seleniumdemo.pages;
+package com.seleniumdemo.testngpackage.pages;
 
-import com.seleniumdemo.models.Customer;
+import com.seleniumdemo.testngpackage.models.Customer;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static com.seleniumdemo.utils.SeleniumHelper.*;
+import static com.seleniumdemo.testngpackage.utils.SeleniumHelper.*;
 
 public class AddressDetailsPage {
 

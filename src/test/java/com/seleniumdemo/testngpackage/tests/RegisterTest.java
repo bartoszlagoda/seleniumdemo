@@ -1,6 +1,6 @@
-package com.seleniumdemo.tests;
+package com.seleniumdemo.testngpackage.tests;
 
-import com.seleniumdemo.pages.HomePage;
+import com.seleniumdemo.testngpackage.pages.HomePage;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
