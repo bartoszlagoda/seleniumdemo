@@ -12,5 +12,6 @@ Feature: Rejestracja uzytkownika
     But Nie jest widoczny formularz rejestracji uzytkownika
 
   Scenario: Rejestracja z niepoprawnym adresem email i poprawnym haslem
-    And Wprowadzamy niepoprawne dane do formularza rejestracji
+#    And Wprowadzamy niepoprawne dane do formularza rejestracji
+    And Wprowadzamy email "test1@test1.com" i haslo "test1@test1.com"
     Then Wyswietla sie komunikat o niepoprawnym adresie email

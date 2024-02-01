@@ -41,6 +41,14 @@ public class SeleniumHelper {
         countrySelect.selectByVisibleText(selectElement);
     }
 
+    public static void waitForElementToExist(By locator){
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getChromeDriver(),Duration.ofSeconds(12));
+        wait.withTimeout(Duration.ofSeconds(12));
+        wait.pollingEvery(Duration.ofSeconds(1));
+
+        wait.until(driver -> driver.findElements(locator).size() > 0);
+    }
+
     public static boolean checkIfElementIsClickableOnTheLoop(By locator,int count) throws InterruptedException {
         for(int i=0; i<count; i++){
             if(DriverFactory.getDriver().findElements(locator).size() > 0){

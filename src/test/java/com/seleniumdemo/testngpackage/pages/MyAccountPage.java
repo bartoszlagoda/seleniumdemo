@@ -39,14 +39,14 @@ public class MyAccountPage {
     }
 
     public LoggedUserPage registerUserValidData(String email, String password) throws InterruptedException {
-        Thread.sleep(1000);
+        waitForElementToExist(By.name("register"));
         registerUser(email, password);
 
         return new LoggedUserPage(driver);
     }
 
     public MyAccountPage registerUserInvalidData(String email, String password) throws InterruptedException {
-        Thread.sleep(1000);
+        waitForElementToExist(By.name("register"));
         registerUser(email, password);
 
         return this;
@@ -77,10 +77,12 @@ public class MyAccountPage {
         regEmailInput.sendKeys(email);
         regPasswordInput.sendKeys(password);
         scrollWindowToElement(driver);
+        waitForElementToExist(By.name("register"));
         if (!checkIfElementIsClickableOnTheLoop(By.name("register"), 5)){
             System.out.println("Nie udalo sie skorzystac z petli, czekam 5000 ms");
-            Thread.sleep(5000);
+            waitForElementToExist(By.name("register"));
             waitForVisibility(registerBtn,driver);
+            waitForElementToExist(By.name("register"));
             registerBtn.click();
         }
     }

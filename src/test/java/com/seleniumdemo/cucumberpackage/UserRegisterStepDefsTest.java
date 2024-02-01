@@ -6,6 +6,8 @@ import com.seleniumdemo.testngpackage.pages.MyAccountPage;
 import com.seleniumdemo.testngpackage.utils.DriverFactory;
 import io.cucumber.java.After;
 import io.cucumber.java.en.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +22,7 @@ public class UserRegisterStepDefsTest {
     WebDriver driver;
     WebElement entryTitle;
     WebElement failedRegisterAlert;
+    private static final Logger logger = LogManager.getLogger();
     @After
     public void tearDown(){
         DriverFactory.quitDriver();
@@ -50,9 +53,16 @@ public class UserRegisterStepDefsTest {
     @Then("Uzytkownik zostaje przekierowany do strony Moje Konto")
     public void uzytkownikZostajePrzekierowanyDoStronyMojeKonto() {
         List<WebElement> logoutLinks = driver.findElements(By.linkText("Logout"));
+        if(logoutLinks.size() == 0){
+            if(driver.findElements(By.name("register")).size() > 0){
+                logger.info("Jestem w asercji przekierowania uzytkownika na konto i 'register'.size() wynosi: " + driver.findElements(By.name("register")).size());
+                driver.findElement(By.name("register")).click();
+            }
+        }
         Assert.assertTrue(logoutLinks.size() > 0);
         Assert.assertTrue(logoutLinks.get(0).isDisplayed());
         Assert.assertTrue(entryTitle.getText().contains("Hello"));
+        logger.info("Wszystkie asercje potwierdzily, ze uzytkownik przeszedl na strone Moje Konto");
     }
 
     @But("Nie jest widoczny formularz rejestracji uzytkownika")
@@ -72,5 +82,13 @@ public class UserRegisterStepDefsTest {
     @Then("Wyswietla sie komunikat o niepoprawnym adresie email")
     public void wyswietlaSieKomunikatONiepoprawnymAdresieEmail() {
         Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"));
+    }
+
+    @And("Wprowadzamy email {string} i haslo {string}")
+    public void wprowadzamyEmailIHaslo(String email, String password) throws InterruptedException {
+        failedRegisterAlert = new HomePage(driver)
+                .openMyAccountPage()
+                .registerUserInvalidData(email, password)
+                .getError();
     }
 }
