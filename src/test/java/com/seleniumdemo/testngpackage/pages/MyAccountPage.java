@@ -1,5 +1,7 @@
 package com.seleniumdemo.testngpackage.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -32,6 +34,7 @@ public class MyAccountPage {
     private WebElement loginBtn;
 
     private WebDriver driver;
+    private static final Logger logger = LogManager.getLogger();
 
     public MyAccountPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -74,17 +77,16 @@ public class MyAccountPage {
     }
 
     private void registerUser(String email, String password) throws InterruptedException {
+        logger.info("Uruchamiam metode registerUser");
+        logger.info("Wprowadzam email '" + email + "'");
         regEmailInput.sendKeys(email);
+        logger.info("Wprowadzam haslo '" + password + "'");
         regPasswordInput.sendKeys(password);
+        logger.info("Scrolluje do elementu Register");
         scrollWindowToElement(driver);
+        logger.info("Czekam az element Register zaistnieje na stronie");
         waitForElementToExist(By.name("register"));
-        if (!checkIfElementIsClickableOnTheLoop(By.name("register"), 5)){
-            System.out.println("Nie udalo sie skorzystac z petli, czekam 5000 ms");
-            waitForElementToExist(By.name("register"));
-            waitForVisibility(registerBtn,driver);
-            waitForElementToExist(By.name("register"));
-            registerBtn.click();
-        }
+        checkIfElementIsClickableOnTheLoop(By.name("register"),6);
     }
 
     public WebElement getError() {

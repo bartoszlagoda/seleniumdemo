@@ -11,7 +11,13 @@ Feature: Rejestracja uzytkownika
     Then Uzytkownik zostaje przekierowany do strony Moje Konto
     But Nie jest widoczny formularz rejestracji uzytkownika
 
-  Scenario: Rejestracja z niepoprawnym adresem email i poprawnym haslem
+  Scenario Outline: Rejestracja z niepoprawnym adresem email i poprawnym haslem
 #    And Wprowadzamy niepoprawne dane do formularza rejestracji
-    And Wprowadzamy email "test1@test1.com" i haslo "test1@test1.com"
+    And Wprowadzamy email "test1@test1.com" i haslo "<password>"
     Then Wyswietla sie komunikat o niepoprawnym adresie email
+
+    Examples:
+    |password|
+    |test1@test1.com|
+    |test1@test1.comtest1@test1.comtest1@test1.com|
+    |test1@test1.comtest1@test1.comtest1@test1.comtest1@test1.com|

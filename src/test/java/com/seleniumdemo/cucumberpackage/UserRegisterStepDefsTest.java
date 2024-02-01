@@ -81,7 +81,7 @@ public class UserRegisterStepDefsTest {
 
     @Then("Wyswietla sie komunikat o niepoprawnym adresie email")
     public void wyswietlaSieKomunikatONiepoprawnymAdresieEmail() {
-        Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"));
+        Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"),"Actual: " + failedRegisterAlert.getText());
     }
 
     @And("Wprowadzamy email {string} i haslo {string}")

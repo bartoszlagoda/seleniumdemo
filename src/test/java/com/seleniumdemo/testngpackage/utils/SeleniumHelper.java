@@ -1,5 +1,7 @@
 package com.seleniumdemo.testngpackage.utils;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +13,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class SeleniumHelper {
+
+    private static final Logger logger = LogManager.getLogger();
 
     public static void waitForClickable(By locator, WebDriver driver){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -42,6 +46,7 @@ public class SeleniumHelper {
     }
 
     public static void waitForElementToExist(By locator){
+        logger.info("Wywoluje metode waitForElementToExist z Timeoutem 12s i powtarzaniem co sekunde.");
         WebDriverWait wait = new WebDriverWait(DriverFactory.getChromeDriver(),Duration.ofSeconds(12));
         wait.withTimeout(Duration.ofSeconds(12));
         wait.pollingEvery(Duration.ofSeconds(1));
@@ -49,14 +54,15 @@ public class SeleniumHelper {
         wait.until(driver -> driver.findElements(locator).size() > 0);
     }
 
-    public static boolean checkIfElementIsClickableOnTheLoop(By locator,int count) throws InterruptedException {
+    public static void checkIfElementIsClickableOnTheLoop(By locator,int count) throws InterruptedException {
+        logger.info("Cos poszlo nie tak z kliknieciem przycisku 'Register'");
         for(int i=0; i<count; i++){
-            if(DriverFactory.getDriver().findElements(locator).size() > 0){
+            if(DriverFactory.getChromeDriver().findElements(locator).size() > 0){
                 Thread.sleep(1000);
-                DriverFactory.getDriver().findElement(locator).click();
-                return true;
+                DriverFactory.getChromeDriver().findElement(locator).click();
+                break;
             }
+            logger.info("Wywoluje " + (i+1) + " raz petle. Probuje ponownie...");
         }
-        return false;
     }
 }
