@@ -4,7 +4,7 @@ Feature: Rejestracja uzytkownika
 
   Scenario: Rejestracja z poprawnym adresem email i haslem
     And Wprowadzamy zadania do wykonania
-    |wyprowadz psa|
-    |umyj okna|
-    |wynies smieci|
-    |zaplacic rachunki|
+    |zadanie 1|wyprowadz psa|Done|
+    |zadanie 2|umyj okna|To Do|
+    |zadanie 3|wynies smieci|To Do|
+    |zadanie 4|zaplacic rachunki|Done|
