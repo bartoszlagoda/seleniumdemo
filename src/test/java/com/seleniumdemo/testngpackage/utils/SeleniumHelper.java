@@ -31,8 +31,9 @@ public class SeleniumHelper {
 
     public static void scrollWindowToElement(WebDriver driver) throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        Thread.sleep(3000);
         js.executeScript("window.scrollBy(0,650)", "");
-        Thread.sleep(1000);
+        Thread.sleep(5000);
     }
 
     public static void chooseSelect(WebElement element,String selectElement){
@@ -40,12 +41,14 @@ public class SeleniumHelper {
         countrySelect.selectByVisibleText(selectElement);
     }
 
-    public static void checkIfElementIsClickableOnTheLoop(By locator,int count) throws InterruptedException {
+    public static boolean checkIfElementIsClickableOnTheLoop(By locator,int count) throws InterruptedException {
         for(int i=0; i<count; i++){
             if(DriverFactory.getDriver().findElements(locator).size() > 0){
-                DriverFactory.getDriver().findElement(locator).click();
                 Thread.sleep(1000);
+                DriverFactory.getDriver().findElement(locator).click();
+                return true;
             }
         }
+        return false;
     }
 }

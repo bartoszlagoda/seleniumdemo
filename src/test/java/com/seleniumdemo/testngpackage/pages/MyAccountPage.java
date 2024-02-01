@@ -39,12 +39,14 @@ public class MyAccountPage {
     }
 
     public LoggedUserPage registerUserValidData(String email, String password) throws InterruptedException {
+        Thread.sleep(1000);
         registerUser(email, password);
 
         return new LoggedUserPage(driver);
     }
 
     public MyAccountPage registerUserInvalidData(String email, String password) throws InterruptedException {
+        Thread.sleep(1000);
         registerUser(email, password);
 
         return this;
@@ -75,8 +77,12 @@ public class MyAccountPage {
         regEmailInput.sendKeys(email);
         regPasswordInput.sendKeys(password);
         scrollWindowToElement(driver);
-        waitForClickable(By.name("register"),driver);
-        checkIfElementIsClickableOnTheLoop(By.name("register"),3);
+        if (!checkIfElementIsClickableOnTheLoop(By.name("register"), 5)){
+            System.out.println("Nie udalo sie skorzystac z petli, czekam 5000 ms");
+            Thread.sleep(5000);
+            waitForVisibility(registerBtn,driver);
+            registerBtn.click();
+        }
     }
 
     public WebElement getError() {
