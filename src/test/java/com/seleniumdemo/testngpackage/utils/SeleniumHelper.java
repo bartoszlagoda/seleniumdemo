@@ -57,12 +57,13 @@ public class SeleniumHelper {
     public static void checkIfElementIsClickableOnTheLoop(By locator,int count) throws InterruptedException {
         logger.info("Cos poszlo nie tak z kliknieciem przycisku 'Register'");
         for(int i=0; i<count; i++){
+            logger.info("Wywoluje " + (i+1) + " raz petle. Probuje ponownie...");
             if(DriverFactory.getChromeDriver().findElements(locator).size() > 0){
                 Thread.sleep(1000);
                 DriverFactory.getChromeDriver().findElement(locator).click();
+                logger.info("Znaleziono element i go wybrano.");
                 break;
             }
-            logger.info("Wywoluje " + (i+1) + " raz petle. Probuje ponownie...");
         }
     }
 }
