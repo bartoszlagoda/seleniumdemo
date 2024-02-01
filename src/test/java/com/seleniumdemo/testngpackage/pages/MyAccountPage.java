@@ -39,13 +39,13 @@ public class MyAccountPage {
         this.driver = driver;
     }
 
-    public LoggedUserPage registerUserValidData(String email, String password) {
+    public LoggedUserPage registerUserValidData(String email, String password) throws InterruptedException {
         registerUser(email, password);
 
         return new LoggedUserPage(driver);
     }
 
-    public MyAccountPage registerUserInvalidData(String email, String password) {
+    public MyAccountPage registerUserInvalidData(String email, String password) throws InterruptedException {
         registerUser(email, password);
 
         return this;
@@ -72,12 +72,11 @@ public class MyAccountPage {
         loginBtn.click();
     }
 
-    private void registerUser(String email, String password) {
+    private void registerUser(String email, String password) throws InterruptedException {
         regEmailInput.sendKeys(email);
         regPasswordInput.sendKeys(password);
-
-        waitForVisibility(registerBtn,driver);
-
+        waitForClickable(By.name("register"),driver);
+        Thread.sleep(5000);
         registerBtn.click();
     }
 

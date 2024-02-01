@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class RegisterTest extends BaseTest {
 
     @Test
-    public void registerUserTest() {
+    public void registerUserTest() throws InterruptedException {
 
         int randomNum = (int) (Math.random() * 1000);
 
@@ -21,7 +21,7 @@ public class RegisterTest extends BaseTest {
     }
 
     @Test
-    public void registerUserWithSameEmailTest() {
+    public void registerUserWithSameEmailTest() throws InterruptedException {
 
         WebElement failedRegisterAlert = new HomePage(driver)
                 .openMyAccountPage()

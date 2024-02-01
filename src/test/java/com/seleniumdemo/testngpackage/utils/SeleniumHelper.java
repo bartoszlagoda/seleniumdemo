@@ -14,6 +14,8 @@ public class SeleniumHelper {
 
     public static void waitForClickable(By locator, WebDriver driver){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.withTimeout(Duration.ofSeconds(10));
+        wait.pollingEvery(Duration.ofSeconds(1));
         wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
