@@ -47,7 +47,7 @@ public class SeleniumHelper {
 
     public static void waitForElementToExist(By locator){
         logger.info("Wywoluje metode waitForElementToExist z Timeoutem 12s i powtarzaniem co sekunde.");
-        WebDriverWait wait = new WebDriverWait(DriverFactory.getChromeDriver(),Duration.ofSeconds(12));
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(),Duration.ofSeconds(12));
         wait.withTimeout(Duration.ofSeconds(12));
         wait.pollingEvery(Duration.ofSeconds(1));
 
@@ -58,9 +58,9 @@ public class SeleniumHelper {
         logger.info("Cos poszlo nie tak z kliknieciem przycisku 'Register'");
         for(int i=0; i<count; i++){
             logger.info("Wywoluje " + (i+1) + " raz petle. Probuje ponownie...");
-            if(DriverFactory.getChromeDriver().findElements(locator).size() > 0){
+            if(DriverFactory.getDriver().findElements(locator).size() > 0){
                 Thread.sleep(1000);
-                DriverFactory.getChromeDriver().findElement(locator).click();
+                DriverFactory.getDriver().findElement(locator).click();
                 logger.info("Znaleziono element i go wybrano.");
                 break;
             }

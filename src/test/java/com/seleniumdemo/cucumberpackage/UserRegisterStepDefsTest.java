@@ -15,7 +15,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-import static com.seleniumdemo.testngpackage.utils.DriverFactory.getChromeDriver;
+import static com.seleniumdemo.testngpackage.utils.DriverFactory.getDriver;
 
 public class UserRegisterStepDefsTest {
 
@@ -30,7 +30,7 @@ public class UserRegisterStepDefsTest {
 
     @Given("Uzytkownik znajduje sie na stronie glownej sklepu")
     public void uzytkownik_znajduje_sie_na_stronie_glownej_sklepu() {
-        driver = getChromeDriver();
+        driver = getDriver();
         driver.manage().window().maximize();
         driver.get("http://seleniumdemo.com/");
     }

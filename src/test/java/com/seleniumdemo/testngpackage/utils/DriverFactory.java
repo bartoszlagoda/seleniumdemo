@@ -11,11 +11,6 @@ public class DriverFactory {
     private static WebDriver driver;
 
     public static WebDriver getDriver(){
-        WebDriverManager.chromedriver().setup();
-        return new ChromeDriver();
-    }
-
-    public static WebDriver getChromeDriver(){
         if(driver == null){
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
