@@ -76,7 +76,7 @@ public class MyAccountPage {
         regEmailInput.sendKeys(email);
         regPasswordInput.sendKeys(password);
 
-        waitForClickable(By.name("register"), driver);
+        waitForVisibility(registerBtn,driver);
 
         registerBtn.click();
     }
