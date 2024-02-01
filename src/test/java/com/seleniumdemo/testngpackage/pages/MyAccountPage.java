@@ -6,8 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static com.seleniumdemo.testngpackage.utils.SeleniumHelper.waitForClickable;
-import static com.seleniumdemo.testngpackage.utils.SeleniumHelper.waitForVisibility;
+import static com.seleniumdemo.testngpackage.utils.SeleniumHelper.*;
 
 public class MyAccountPage {
 
@@ -75,9 +74,9 @@ public class MyAccountPage {
     private void registerUser(String email, String password) throws InterruptedException {
         regEmailInput.sendKeys(email);
         regPasswordInput.sendKeys(password);
+        scrollWindowToElement(driver);
         waitForClickable(By.name("register"),driver);
-        Thread.sleep(5000);
-        registerBtn.click();
+        checkIfElementIsClickableOnTheLoop(By.name("register"),3);
     }
 
     public WebElement getError() {

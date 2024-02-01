@@ -30,13 +30,22 @@ public class SeleniumHelper {
     }
 
     public static void scrollWindowToElement(WebDriver driver) throws InterruptedException {
-        Thread.sleep(1000);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,650)", "");
+        Thread.sleep(1000);
     }
 
     public static void chooseSelect(WebElement element,String selectElement){
         Select countrySelect = new Select(element);
         countrySelect.selectByVisibleText(selectElement);
+    }
+
+    public static void checkIfElementIsClickableOnTheLoop(By locator,int count) throws InterruptedException {
+        for(int i=0; i<count; i++){
+            if(DriverFactory.getDriver().findElements(locator).size() > 0){
+                DriverFactory.getDriver().findElement(locator).click();
+                Thread.sleep(1000);
+            }
+        }
     }
 }
