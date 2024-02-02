@@ -11,4 +11,13 @@ public class Task {
         this.values = values;
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "name='" + name + '\'' +
+                ", values='" + values + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }
