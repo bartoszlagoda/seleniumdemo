@@ -18,7 +18,7 @@ public class AddTasksStepdefsTest {
 
     @And("Drukowanie na ekranie zadan za pomoca mapy") // Lekcja 43
     public void drukowanieNaEkranieZadanZaPomocaMapy(DataTable dataTable) {
-        Map<String,String> tasks = dataTable.asMap();
+        Map<String, String> tasks = dataTable.asMap();
         // wyciaganie kluczy z mapy
         Set<String> keys = tasks.keySet();
         keys.forEach(key -> {
@@ -28,7 +28,7 @@ public class AddTasksStepdefsTest {
     }
 
     @And("Drukowanie na ekranie zadan za pomoca jawnego podawania mapy") // Lekcja 43
-    public void drukowanieNaEkranieZadanZaPomocaJawnegoPodawaniaMapy(Map<String,String> tasks) {
+    public void drukowanieNaEkranieZadanZaPomocaJawnegoPodawaniaMapy(Map<String, String> tasks) {
         Set<String> keys = tasks.keySet();
         keys.forEach(key -> {
             System.out.println(key);
@@ -37,11 +37,12 @@ public class AddTasksStepdefsTest {
     }
 
     @And("Wprowadzamy zadania do wykonania") // Lekcja 45
-    public void wprowadzamyZadaniaDoWykonania(List<Task> tasks){
+    public void wprowadzamyZadaniaDoWykonania(List<Task> tasks) {
         tasks.forEach(System.out::println);
     }
+
     @DataTableType // Lekcja 45
-    public Task handleTask(Map<String,String> table){
-        return new Task(table.get("name"),table.get("value"),table.get("status"));
+    public Task handleTask(Map<String, String> table) {
+        return new Task(table.get("name"), table.get("value"), table.get("status"));
     }
 }

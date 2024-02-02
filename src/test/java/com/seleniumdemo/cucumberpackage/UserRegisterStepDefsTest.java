@@ -23,8 +23,9 @@ public class UserRegisterStepDefsTest {
     WebElement entryTitle;
     WebElement failedRegisterAlert;
     private static final Logger logger = LogManager.getLogger();
+
     @After
-    public void tearDown(){
+    public void tearDown() {
         DriverFactory.quitDriver();
     }
 
@@ -37,7 +38,7 @@ public class UserRegisterStepDefsTest {
 
     @When("Przejscie do strony MyAccount")
     public void przejscie_do_strony_my_account() {
-         new HomePage(driver)
+        new HomePage(driver)
                 .openMyAccountPage();
     }
 
@@ -46,15 +47,15 @@ public class UserRegisterStepDefsTest {
     public void wprowadzamyPoprawneDaneDoFormularzaRejestracji() throws InterruptedException {
         Faker faker = new Faker();
         entryTitle = new MyAccountPage(driver)
-                .registerUserValidData(faker.internet().emailAddress(),"testeroprogramowania@testeroprogramowania.com")
+                .registerUserValidData(faker.internet().emailAddress(), "testeroprogramowania@testeroprogramowania.com")
                 .getEntryTitle();
     }
 
     @Then("Uzytkownik zostaje przekierowany do strony Moje Konto")
     public void uzytkownikZostajePrzekierowanyDoStronyMojeKonto() {
         List<WebElement> logoutLinks = driver.findElements(By.linkText("Logout"));
-        if(logoutLinks.size() == 0){
-            if(driver.findElements(By.name("register")).size() > 0){
+        if (logoutLinks.size() == 0) {
+            if (driver.findElements(By.name("register")).size() > 0) {
                 logger.info("Jestem w asercji przekierowania uzytkownika na konto i 'register'.size() wynosi: " + driver.findElements(By.name("register")).size());
                 driver.findElement(By.name("register")).click();
             }
@@ -81,7 +82,7 @@ public class UserRegisterStepDefsTest {
 
     @Then("Wyswietla sie komunikat o niepoprawnym adresie email")
     public void wyswietlaSieKomunikatONiepoprawnymAdresieEmail() {
-        Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"),"Actual: " + failedRegisterAlert.getText());
+        Assert.assertTrue(failedRegisterAlert.getText().contains("An account is already registered"), "Actual: " + failedRegisterAlert.getText());
     }
 
     @And("Wprowadzamy email {string} i haslo {string}")
