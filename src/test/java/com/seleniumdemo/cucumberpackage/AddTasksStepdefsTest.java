@@ -10,24 +10,37 @@ import java.util.Set;
 
 public class AddTasksStepdefsTest {
 
-//    @And("Wprowadzamy zadania do wykonania")
-//    public void wprowadzamyZadaniaDoWykonania(Map<String,String> tasks) {
-////        List<String> tasks = dataTable.asList();
-////        Map<String,String> tasks = dataTable.asMap();
-//        // wyciaganie kluczy z mapy
-//        Set<String> keys = tasks.keySet();
-//        keys.forEach(key -> {
-//                System.out.println(key);
-//                System.out.println(tasks.get(key));
-//    });
-////        tasks.forEach(System.out::println);
-//    }
+    @And("Drukowanie na ekranie zadan za pomoca listy") // Lekcja 42
+    public void drukowanieNaEkranieZadanZaPomocaListy(DataTable dataTable) {
+        List<String> tasks = dataTable.asList();
+        tasks.forEach(System.out::println);
+    }
 
-    @And("Wprowadzamy zadania do wykonania")
+    @And("Drukowanie na ekranie zadan za pomoca mapy") // Lekcja 43
+    public void drukowanieNaEkranieZadanZaPomocaMapy(DataTable dataTable) {
+        Map<String,String> tasks = dataTable.asMap();
+        // wyciaganie kluczy z mapy
+        Set<String> keys = tasks.keySet();
+        keys.forEach(key -> {
+            System.out.println(key);
+            System.out.println(tasks.get(key));
+        });
+    }
+
+    @And("Drukowanie na ekranie zadan za pomoca jawnego podawania mapy") // Lekcja 43
+    public void drukowanieNaEkranieZadanZaPomocaJawnegoPodawaniaMapy(Map<String,String> tasks) {
+        Set<String> keys = tasks.keySet();
+        keys.forEach(key -> {
+            System.out.println(key);
+            System.out.println(tasks.get(key));
+        });
+    }
+
+    @And("Wprowadzamy zadania do wykonania") // Lekcja 45
     public void wprowadzamyZadaniaDoWykonania(List<Task> tasks){
         tasks.forEach(System.out::println);
     }
-    @DataTableType
+    @DataTableType // Lekcja 45
     public Task handleTask(Map<String,String> table){
         return new Task(table.get("name"),table.get("value"),table.get("status"));
     }
