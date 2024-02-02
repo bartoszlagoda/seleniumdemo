@@ -14,7 +14,7 @@ import java.time.Duration;
 
 public class SeleniumHelper {
 
-    private static final Logger logger = LogManager.getLogger();
+    private static Logger logger;
 
     public static void waitForClickable(By locator, WebDriver driver){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -25,19 +25,24 @@ public class SeleniumHelper {
 
     public static void waitForVisibility(WebElement element, WebDriver driver){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.withTimeout(Duration.ofSeconds(10));
+        wait.pollingEvery(Duration.ofSeconds(1));
         wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitForPresenceOfElementLocated(By locator, WebDriver driver){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.withTimeout(Duration.ofSeconds(10));
+        wait.pollingEvery(Duration.ofSeconds(1));
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(locator,0));
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+
     }
 
     public static void scrollWindowToElement(WebDriver driver) throws InterruptedException {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Thread.sleep(3000);
         js.executeScript("window.scrollBy(0,650)", "");
-        Thread.sleep(5000);
     }
 
     public static void chooseSelect(WebElement element,String selectElement){
@@ -46,7 +51,7 @@ public class SeleniumHelper {
     }
 
     public static void waitForElementToExist(By locator){
-        logger.info("Wywoluje metode waitForElementToExist z Timeoutem 12s i powtarzaniem co sekunde.");
+        logInfo("Calls the waitForElement Exist method with a timeout of 12s and repetition every second");
         WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(),Duration.ofSeconds(12));
         wait.withTimeout(Duration.ofSeconds(12));
         wait.pollingEvery(Duration.ofSeconds(1));
@@ -55,15 +60,25 @@ public class SeleniumHelper {
     }
 
     public static void checkIfElementIsClickableOnTheLoop(By locator,int count) throws InterruptedException {
-        logger.info("Cos poszlo nie tak z kliknieciem przycisku 'Register'");
-        for(int i=0; i<count; i++){
-            logger.info("Wywoluje " + (i+1) + " raz petle. Probuje ponownie...");
-            if(DriverFactory.getDriver().findElements(locator).size() > 0){
-                Thread.sleep(1000);
-                DriverFactory.getDriver().findElement(locator).click();
-                logger.info("Znaleziono element i go wybrano.");
-                break;
-            }
-        }
+        logInfo("Need to check if locator " + locator + " is clickable in the loop");
+//        for(int i=0; i<count; i++){
+//            logInfo((i+1) + " attempt");
+//            if(DriverFactory.getDriver().findElements(locator).size() > 0){
+//                Thread.sleep(1000);
+//                DriverFactory.getDriver().findElement(locator).click();
+//                logInfo(locator + " is found");
+//                break;
+//            }
+//        }
+        WebDriverWait wait = new WebDriverWait(DriverFactory.getDriver(),Duration.ofSeconds(12));
+        wait.until(ExpectedConditions.numberOfElementsToBeMoreThan(locator,0));
+        wait.withTimeout(Duration.ofSeconds(12));
+        wait.pollingEvery(Duration.ofSeconds(1));
+        DriverFactory.getDriver().findElement(locator).click();
+    }
+
+    public static void logInfo(String info){
+        logger = LogManager.getLogger();
+        logger.info(info);
     }
 }
